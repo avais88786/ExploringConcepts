@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebApplication1.Models.CCTransaction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Search","SUN",FormMethod.Get))
+{
+<fieldset>
+    @Html.TextBox("txtboxSearchReference")
+    <input type="submit" value="Search" />
+    <br/><br/>
+</fieldset>
+
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Risk.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RiskId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Risk.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RiskId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CCTransactionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CCTransactionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CCTransactionId })
+        </td>
+    </tr>
+}
+
+</table>
