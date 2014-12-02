@@ -67,8 +67,7 @@ namespace UltraSuperNoodle
                         }
                     }
             catch(Exception ex)
-                {
-                  
+                {               
                 }
         }
 
@@ -89,6 +88,34 @@ namespace UltraSuperNoodle
             }
 
             
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+         //   if (keyData = "Control")
+            
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                Form searchForm = new SearchForm(this.richTextBox1);
+                searchForm.Show();
+            }
         }
     }
 }

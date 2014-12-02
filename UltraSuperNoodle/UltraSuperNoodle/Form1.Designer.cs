@@ -37,6 +37,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // comboBoxAppName
@@ -89,6 +90,7 @@
             this.button_save.TabIndex = 4;
             this.button_save.Text = "Save";
             this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // comboBoxUserNames
             // 
@@ -123,11 +125,22 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Password:";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(66, 218);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(340, 152);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "this text is here \n\n\nAvais\n";
+            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 390);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
@@ -137,6 +150,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxDbNames);
             this.Controls.Add(this.comboBoxAppName);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "UltraSuperNoodle";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -156,6 +170,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
