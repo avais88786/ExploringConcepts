@@ -37,6 +37,22 @@ namespace GetType_TypeOf_Is
             Console.WriteLine("Gettype of o2 is: {0}", o2.GetType().Name);
             Console.WriteLine("Base Gettype of o2 is: {0}", o2.GetType().BaseType.Name);
 
+            MyBaseClass baseclassCasted = derivedClass;
+
+            Console.WriteLine("Gettype of baseclassCasted is: {0}", baseclassCasted.GetType().Name);
+            Console.WriteLine("Property of derivedClassCastedToBaseClass is: {0}", baseclassCasted.GetType().GetProperty("DerivedClassId").Name);
+            Console.WriteLine("Property of derivedClassCastedToBaseClass is: {0}", baseclassCasted.GetType().GetProperty("DerivedClassId"));
+
+            List<MyDerivedClass> derivedClassList =new List<MyDerivedClass>(){new MyDerivedClass(){DerivedClassId = 2}};
+            List<MyBaseClass> baseClassList = derivedClassList.Cast<MyBaseClass>().ToList();
+            //cannot be done!
+            //MyDerivedClass derivedClassCasted = (MyDerivedClass) baseClass;
+            //Console.WriteLine("Gettype of derivedClassCasted is: {0}", derivedClassCasted.GetType().Name);
+
+            var zz = baseClassList.Cast<MyDerivedClass>();
+
+            Type type = new List<MyDerivedClass>().SingleOrDefault().GetType();
+
             MyDerivedClass derivedClass2 = new MyDerivedClass();
             derivedClass2.DerivedClassId = 2;
             derivedClass2.BaseClassId = 1;
@@ -71,6 +87,8 @@ namespace GetType_TypeOf_Is
         public class MyDerivedClass : MyBaseClass
         {
             public int DerivedClassId { get; set; }
+
+
         }
 
         public class NotRealtedAnyhow
