@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using OpenGI.MVC
+using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Fleet;
 
 namespace OTOMReverseEngineerXML
 {
@@ -16,9 +16,11 @@ namespace OTOMReverseEngineerXML
             XmlSerializer xmlSer = new XmlSerializer(typeof(MiniFleetNBRq));
 
             FileStream fs = new FileStream("RSAQuoteErrors.xml", FileMode.Open);
-            var deser = xmlSer.Deserialize(fs);
+            MiniFleetNBRq deser = (MiniFleetNBRq)xmlSer.Deserialize(fs);
             fs.Close();
 
+            FleetDataCapture fleetDC = new FleetDataCapture();
+            fleetDC.BusinessDetails.InsuredDetails.InsuredOrCompanyName = deser.Insured.CompanyName;
 
 
         }
