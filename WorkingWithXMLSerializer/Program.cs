@@ -66,6 +66,22 @@ namespace WorkingWithXMLSerializer
                 
                 xmlWriter.WriteString(sb.ToString());
             }
+            Type type = GetConcreteClass("").GetType();
+            XmlSerializer ser = new XmlSerializer(type);
+
+            sb.Clear();
+            StringWriter srw = new StringWriter(sb);
+
+            ser.Serialize(srw, new TestClass() { A = 5 });
+            var x = sb.ToString();
+
+
+            StringReader sr = new StringReader(x);
+            XmlReader xmlReader = XmlReader.Create(sr);
+            
+            ITestClass objectt = (ITestClass)ser.Deserialize(xmlReader);
+
+            
 
             Console.WriteLine();
             Console.WriteLine(sb2.ToString());
@@ -73,5 +89,26 @@ namespace WorkingWithXMLSerializer
 
 
         }
+
+
+        public static ITestClass GetConcreteClass(string openProductString)
+        {
+            return new TestClass();
+        }
+
+
+
     }
+
+
+    public class TestClass : ITestClass
+    {
+        public int A;
+    }
+
+    public interface ITestClass
+    {
+
+    }
+
 }

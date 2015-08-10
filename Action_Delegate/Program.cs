@@ -32,7 +32,7 @@ namespace Action_Delegate
             //Console.WriteLine(expr.Compile().Invoke(instance));
 
 
-            string s = "SubsidaryCompanies[0].TestGroup[0]";
+            string s = "SubsidaryCompanies[1].TestGroup[55]";
             string s2 = "[0]SubsidaryCompanies.TestGroup";
             var x = s.LastIndexOf('[');
             var indexX = s[x];
@@ -52,7 +52,18 @@ namespace Action_Delegate
             Regex pattern = new Regex(@"[.\[\]]");
             var gggg = pattern.Replace(template, "_");
 
-            Console.ReadLine();
+
+            string[] numbers = Regex.Split(s, @"\D\S");
+            var t = Regex.Match(s, @"\d+",RegexOptions.RightToLeft);
+
+            var tt3 = s.LastIndexOf('[');
+
+            var indexString = s.Substring(0, tt3);
+
+            var tt = s.Split(new char[]{'['});
+            
+            
+           
 
         }
 
