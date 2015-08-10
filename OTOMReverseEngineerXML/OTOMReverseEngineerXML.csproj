@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A9828AB-023F-418F-98F6-51286B6105B3}</ProjectGuid>
+    <ProjectGuid>{C92617EF-8434-45FF-A660-549F08747D88}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LinqToXML</RootNamespace>
-    <AssemblyName>LinqToXML</AssemblyName>
+    <RootNamespace>OTOMReverseEngineerXML</RootNamespace>
+    <AssemblyName>OTOMReverseEngineerXML</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,18 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\..\..\..\..\..\..\Trader\iMarketSprint0\Code\Open\External\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Trader\iMarketSprint0\Code\Open\External\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenGI.OpenTrader.Common">
-      <HintPath>..\..\..\..\..\..\..\Trader\iMarketTeamTwo\Code\Open\OpenGI.OpenTrader.Common\bin\Debug\OpenGI.OpenTrader.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenGI.OpenTrader.Data">
-      <HintPath>..\..\..\..\..\..\..\Trader\iMarketTeamTwo\Code\Open\OpenGI.OpenTrader.Data\bin\Debug\OpenGI.OpenTrader.Data.dll</HintPath>
+    <Reference Include="OpenGI.MVC.BusinessLines.ViewModels">
+      <HintPath>..\..\..\..\..\..\..\Trader\MVCTrunk\Code\OpenGI.MVC.BusinessLines.ViewModels\bin\Debug\OpenGI.MVC.BusinessLines.ViewModels.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,16 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultRegistry.cs" />
+    <Compile Include="MsgSchemaMiniFleetNBRq.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Schemas\MsgSchemaShopPackageQuoteNBRq.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\MsgSchemaTradesmanAllNBRq.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PreQuoteXml.xml">
-      <SubType>Designer</SubType>
+    <Content Include="Libs\OpenGI.MVC.BusinessLines.ViewModels.dll" />
+    <Content Include="RSAQuoteErrors.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

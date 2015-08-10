@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PropertyOwnersDataCapture xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="">
+  <CoverQuestionsTab>
+    <_pageTitle>General Covers</_pageTitle>
+    <DoYouHaveAnyEmployees>false</DoYouHaveAnyEmployees>
+    <DoYouRequireEmployersLiabilityCover>false</DoYouRequireEmployersLiabilityCover>
+    <DoYouRequireOtherCover>false</DoYouRequireOtherCover>
+    <DoYouRequirePropertyOwnersLiabilityCover>false</DoYouRequirePropertyOwnersLiabilityCover>
+    <DoYouRequireTerrorismCover>false</DoYouRequireTerrorismCover>
+    <Employees>
+      <Employee>
+        <DoesAnyEmployeeWorkWithHeatOrFire>false</DoesAnyEmployeeWorkWithHeatOrFire>
+        <EmploymentType>
+          <Selected i:nil="true" xmlns="" />
+        </EmploymentType>
+        <NumberOfEmployees>0</NumberOfEmployees>
+        <TotalAnnualWages>0</TotalAnnualWages>
+      </Employee>
+    </Employees>
+    <EmployersLiabilityCoverSumInsured>0</EmployersLiabilityCoverSumInsured>
+    <OtherCover>
+      <OtherCover>
+        <OtherCoverSumInsured>0</OtherCoverSumInsured>
+        <OtherCoverType>
+          <Selected i:nil="true" xmlns="" />
+        </OtherCoverType>
+      </OtherCover>
+    </OtherCover>
+    <PropertyOwnersLiabilityCoverSumInsured>0</PropertyOwnersLiabilityCoverSumInsured>
+  </CoverQuestionsTab>
+  <DeclarationsTab>
+    <_pageTitle>Declaration Questions</_pageTitle>
+    <BeenDeclaredBankrupt>true</BeenDeclaredBankrupt>
+    <DoesBusinessComplyWithTheRequirementsOfTheRegualtoryReform>true</DoesBusinessComplyWithTheRequirementsOfTheRegualtoryReform>
+    <HadAProposalRefused>true</HadAProposalRefused>
+    <HadAnyConvictions>true</HadAnyConvictions>
+    <IsInsuranceCurrentlyOrPreviouslyHeld>true</IsInsuranceCurrentlyOrPreviouslyHeld>
+  </DeclarationsTab>
+  <PropertyDetailsTab>
+    <_pageTitle>Property Details</_pageTitle>
+  </PropertyDetailsTab>
+  <PropertyOwnersGeneralCoversTab>
+    <_pageTitle>Claims</_pageTitle>
+    <ClaimInformation xmlns:d3p1="http://schemas.datacontract.org/2004/07/OpenGI.MVC.ViewModels" i:nil="true" />
+    <ClaimsInLast5Years i:nil="true" />
+  </PropertyOwnersGeneralCoversTab>
+  <StandardQuestionsTab>
+    <_pageTitle>Standard Questions</_pageTitle>
+    <AddressInformation xmlns:d3p1="http://schemas.datacontract.org/2004/07/OpenGI.MVC.ViewModels">
+      <d3p1:AddressLineOne>38 Saddlers Walk</d3p1:AddressLineOne>
+      <d3p1:AddressLineTwo>lkm</d3p1:AddressLineTwo>
+      <d3p1:Postcode>WR4 9JR</d3p1:Postcode>
+    </AddressInformation>
+    <AllEmployeesPaidBelowPAYEThreshold>true</AllEmployeesPaidBelowPAYEThreshold>
+    <CompanyStatus>
+      <Selected xmlns="">B646 002</Selected>
+    </CompanyStatus>
+    <CoverStartDate>2015-03-12T00:00:00</CoverStartDate>
+    <EmployersReferenceNumber i:nil="true" />
+    <InsurerInformation i:nil="true" />
+    <PersonalInformation xmlns:d3p1="http://schemas.datacontract.org/2004/07/OpenGI.MVC.ViewModels">
+      <d3p1:PersonalInformation>
+        <d3p1:FirstName i:nil="true" />
+        <d3p1:LastName i:nil="true" />
+        <d3p1:Title>
+          <Selected i:nil="true" xmlns="" />
+        </d3p1:Title>
+      </d3p1:PersonalInformation>
+    </PersonalInformation>
+    <SubsidiaryCompanies xmlns:d3p1="http://schemas.datacontract.org/2004/07/OpenGI.MVC.ViewModels">
+      <d3p1:SubsidiaryCompany>
+        <d3p1:AddressInformation>
+          <d3p1:AddressLineOne i:nil="true" />
+          <d3p1:AddressLineTwo i:nil="true" />
+          <d3p1:Postcode i:nil="true" />
+        </d3p1:AddressInformation>
+        <d3p1:CompanyName i:nil="true" />
+        <d3p1:CoveredUnderPolicy>false</d3p1:CoveredUnderPolicy>
+        <d3p1:EmployersReferenceNumberTwo i:nil="true" />
+        <d3p1:ExemptFromHMCEEmployersReferenceNumber>false</d3p1:ExemptFromHMCEEmployersReferenceNumber>
+      </d3p1:SubsidiaryCompany>
+    </SubsidiaryCompanies>
+    <SubsidiaryCompaniesExist>false</SubsidiaryCompaniesExist>
+    <TargetPremium>0.00</TargetPremium>
+    <Trade>
+      <Selected xmlns="">B566 H74</Selected>
+    </Trade>
+    <TradingName>asdasd</TradingName>
+    <TradingNameTwo>asds</TradingNameTwo>
+    <YearEstablished>1995</YearEstablished>
+  </StandardQuestionsTab>
+</PropertyOwnersDataCapture>

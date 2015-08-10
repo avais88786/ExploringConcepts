@@ -1,0 +1,276 @@
+
+		<ns:MiniFleetNBRq xmlns:ns="http://www.polaris-uk.co.uk/Schema/1/MiniFleetNBRq">
+			<DateGenerated>2015-08-10</DateGenerated>
+			<TimeGenerated>14:57:16</TimeGenerated>
+			<StartDate>2015-08-10</StartDate>
+			<StartTime>14:57:00</StartTime>
+			<EndDate>2016-08-09</EndDate>
+			<EndTime>23:59:00</EndTime>
+			<BusinessSource>
+				<Code>
+					<Value>B183 002</Value>
+					<ShortDescription>Broker Office</ShortDescription>
+				</Code>
+			</BusinessSource>
+			<SoftwareHouse>
+				<Code>
+					<Value>B82 16</Value>
+					<ShortDescription>Open GI Limited</ShortDescription>
+				</Code>
+			</SoftwareHouse>
+			<Intermediary>
+				<PEMId>A0038900033</PEMId>
+				<CompanyName>TraderQA4</CompanyName>
+				<RiskReference>AVAI004FXD</RiskReference>
+				<TransactionReference>20454009</TransactionReference>
+				<Contact>
+					<IndividualName>
+						<FirstForename>Avais</FirstForename>
+						<Surname>Dev</Surname>
+					</IndividualName>
+					<WorkTelephoneNo>01234567890</WorkTelephoneNo>
+					<EmailAddress>imarket_broker@opentesting.co.uk</EmailAddress>
+				</Contact>
+			</Intermediary>
+			<Insured>
+				<CompanyName>validquote</CompanyName>
+				<CompanyStatusCode>
+					<Value>B646 001</Value>
+					<ShortDescription>Limited Company</ShortDescription>
+				</CompanyStatusCode>
+				<TradingName>
+					<Name>validquote</Name>
+				</TradingName>
+				<Address>
+					<Line1>N T T Data Uk</Line1>
+					<Line2>Unit 4020 Waterside Centre</Line2>
+					<Line3>Birmingham</Line3>
+					<Postcode>B37 7YN</Postcode>
+				</Address>
+				<Trade>
+					<Code>
+						<Value>B566 C09</Value>
+						<ShortDescription>Accountancy</ShortDescription>
+					</Code>
+					<MainInd>
+						<Value>true</Value>
+					</MainInd>
+				</Trade>
+				<YearBusinessEstablished>1995</YearBusinessEstablished>
+				<Declaration>
+					<LossesInd>
+						<Value>false</Value>
+					</LossesInd>
+					<BankruptInd>
+						<Value>false</Value>
+					</BankruptInd>
+					<CountyCourtJudgementInd>
+						<Value>false</Value>
+					</CountyCourtJudgementInd>
+					<ConvictionsInd>
+						<Value>false</Value>
+					</ConvictionsInd>
+					<DisqualificationInd>
+						<Value>false</Value>
+					</DisqualificationInd>
+					<CustomsOrInlandRevActionInd>
+						<Value>false</Value>
+					</CustomsOrInlandRevActionInd>
+					<InsuranceInd>
+						<Value>false</Value>
+					</InsuranceInd>
+					<HealthAndSafetyInd>
+						<Value>false</Value>
+					</HealthAndSafetyInd>
+				</Declaration>
+			</Insured>
+			<RiskProfile>
+				<Declarations>
+					<ValidDriverLicenceInd>
+						<Value>true</Value>
+					</ValidDriverLicenceInd>
+					<HazardousGoodsInd>
+						<Value>false</Value>
+					</HazardousGoodsInd>
+					<HazardousIndustry>
+						<DestinationCode>
+							<Value>B576 018</Value>
+							<ShortDescription>None</ShortDescription>
+						</DestinationCode>
+					</HazardousIndustry>
+				</Declarations>
+				<RiskManagement>
+					<RiskManagementInd>
+						<Value>false</Value>
+					</RiskManagementInd>
+				</RiskManagement>
+			</RiskProfile>
+			<Policy>
+				<StartDate>2015-08-10</StartDate>
+				<StartTime>14:57:00</StartTime>
+				<EndDate>2016-08-09</EndDate>
+				<EndTime>23:59:00</EndTime>
+			</Policy>
+			<VehicleCover>
+				<Code>
+					<Value>B205 M15</Value>
+					<ShortDescription>Comprehensive</ShortDescription>
+				</Code>
+				<Use>
+					<Code>
+						<Value>B549 002</Value>
+						<ShortDescription>Business Use Of The Insured</ShortDescription>
+					</Code>
+				</Use>
+				<DrivingRestriction>
+					<Value>B134 X</Value>
+					<ShortDescription>Any Authorised Licensed Driver</ShortDescription>
+				</DrivingRestriction>
+				<LocationCode>
+					<Value>B657 012</Value>
+					<ShortDescription>U.K.</ShortDescription>
+				</LocationCode>
+				<Excess>
+					<ExcessTypeCode>
+						<Value>B205 A05</Value>
+						<ShortDescription>Accidental Damage</ShortDescription>
+					</ExcessTypeCode>
+				</Excess>
+			</VehicleCover>
+			<Vehicle>
+				<Id>1</Id>
+				<TemporaryInd>
+					<Value>false</Value>
+				</TemporaryInd>
+				<ReferenceNumber>ro10kzs</ReferenceNumber>
+				<ManufacturedYear>2014</ManufacturedYear>
+				<Value>7000</Value>
+				<BusinessCarDetail>
+					<MakeModelCode>
+						<Value>18503249</Value>
+						<ShortDescription>TITANIUM NAV TDCI 1997cc 5 Doors 2013 - 2014</ShortDescription>
+					</MakeModelCode>
+					<BodyTypeCode>
+						<Value>B10 02</Value>
+						<ShortDescription>Hatchback</ShortDescription>
+					</BodyTypeCode>
+					<EngineCapacity>1997</EngineCapacity>
+					<FuelTypeCode>
+						<Value>B642 002</Value>
+						<ShortDescription>Diesel</ShortDescription>
+					</FuelTypeCode>
+					<TransmissionTypeCode>
+						<Value>B110 001</Value>
+						<ShortDescription>Automatic</ShortDescription>
+					</TransmissionTypeCode>
+					<GaragingAddress>
+						<GaragingAddressInd>
+							<Value>true</Value>
+						</GaragingAddressInd>
+						<Premises />
+					</GaragingAddress>
+					<Modification>
+						<PerformanceEnhancementInd>
+							<Value>false</Value>
+						</PerformanceEnhancementInd>
+						<SignWrittenInd>
+							<Value>true</Value>
+						</SignWrittenInd>
+					</Modification>
+				</BusinessCarDetail>
+				<VehicleRating>
+					<CalculationBasis>
+						<Value>B554 007</Value>
+						<ShortDescription>Not Previously Rated</ShortDescription>
+					</CalculationBasis>
+				</VehicleRating>
+				<VehicleCover>
+					<Code>
+						<Value>B205 M15</Value>
+						<ShortDescription>Comprehensive</ShortDescription>
+					</Code>
+					<Use>
+						<Code>
+							<Value>B549 002</Value>
+							<ShortDescription>Business Use Of The Insured</ShortDescription>
+						</Code>
+					</Use>
+					<DrivingRestriction>
+						<Value>B134 X</Value>
+						<ShortDescription>Any Authorised Licensed Driver</ShortDescription>
+					</DrivingRestriction>
+					<LocationCode>
+						<Value>B657 012</Value>
+						<ShortDescription>U.K.</ShortDescription>
+					</LocationCode>
+				</VehicleCover>
+			</Vehicle>
+			<Vehicle>
+				<Id>2</Id>
+				<TemporaryInd>
+					<Value>false</Value>
+				</TemporaryInd>
+				<ReferenceNumber>CB12 8EF</ReferenceNumber>
+				<ManufacturedYear>2014</ManufacturedYear>
+				<Value>5000</Value>
+				<BusinessCarDetail>
+					<MakeModelCode>
+						<Value>17568701</Value>
+						<ShortDescription>CC-2 TDCI (COUPE/CABRIOLET) 1997cc 2 Doors 2006 - </ShortDescription>
+					</MakeModelCode>
+					<BodyTypeCode>
+						<Value>B10 08</Value>
+						<ShortDescription>Convertible/Cabriolet</ShortDescription>
+					</BodyTypeCode>
+					<EngineCapacity>1997</EngineCapacity>
+					<FuelTypeCode>
+						<Value>B642 002</Value>
+						<ShortDescription>Diesel</ShortDescription>
+					</FuelTypeCode>
+					<TransmissionTypeCode>
+						<Value>B110 002</Value>
+						<ShortDescription>Manual</ShortDescription>
+					</TransmissionTypeCode>
+					<GaragingAddress>
+						<GaragingAddressInd>
+							<Value>true</Value>
+						</GaragingAddressInd>
+						<Premises />
+					</GaragingAddress>
+					<Modification>
+						<PerformanceEnhancementInd>
+							<Value>false</Value>
+						</PerformanceEnhancementInd>
+						<SignWrittenInd>
+							<Value>false</Value>
+						</SignWrittenInd>
+					</Modification>
+				</BusinessCarDetail>
+				<VehicleRating>
+					<CalculationBasis>
+						<Value>B554 007</Value>
+						<ShortDescription>Not Previously Rated</ShortDescription>
+					</CalculationBasis>
+				</VehicleRating>
+				<VehicleCover>
+					<Code>
+						<Value>B205 M15</Value>
+						<ShortDescription>Comprehensive</ShortDescription>
+					</Code>
+					<Use>
+						<Code>
+							<Value>B549 002</Value>
+							<ShortDescription>Business Use Of The Insured</ShortDescription>
+						</Code>
+					</Use>
+					<DrivingRestriction>
+						<Value>B134 X</Value>
+						<ShortDescription>Any Authorised Licensed Driver</ShortDescription>
+					</DrivingRestriction>
+					<LocationCode>
+						<Value>B657 012</Value>
+						<ShortDescription>U.K.</ShortDescription>
+					</LocationCode>
+				</VehicleCover>
+			</Vehicle>
+		</ns:MiniFleetNBRq>
