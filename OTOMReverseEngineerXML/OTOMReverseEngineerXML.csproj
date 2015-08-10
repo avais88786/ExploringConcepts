@@ -59,6 +59,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Libs\OpenGI.MVC.BusinessLines.ViewModels.dll" />
     <Content Include="RSAQuoteErrors.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

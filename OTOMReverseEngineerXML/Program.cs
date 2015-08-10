@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using OpenGI.MVC
 
 namespace OTOMReverseEngineerXML
 {
@@ -17,6 +18,8 @@ namespace OTOMReverseEngineerXML
             FileStream fs = new FileStream("RSAQuoteErrors.xml", FileMode.Open);
             var deser = xmlSer.Deserialize(fs);
             fs.Close();
+
+
 
         }
     }
