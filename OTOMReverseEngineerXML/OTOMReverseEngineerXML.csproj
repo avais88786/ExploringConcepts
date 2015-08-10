@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenGI.MVC.BusinessLines.ViewModels">
+      <HintPath>..\..\..\..\..\..\..\Trader\MVCTrunk\Code\OpenGI.MVC.BusinessLines.ViewModels\bin\Debug\OpenGI.MVC.BusinessLines.ViewModels.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Schemas\MsgSchemaShopPackageQuoteNBRq.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\MsgSchemaTradesmanAllNBRq.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="RSAQuoteErrors.xml">
