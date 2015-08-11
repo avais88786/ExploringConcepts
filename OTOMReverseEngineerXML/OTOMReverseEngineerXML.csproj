@@ -33,11 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="OpenGI.MVC.BusinessLines.ViewModels">
       <HintPath>..\..\..\..\..\..\..\Trader\MVCTrunk\Code\OpenGI.MVC.BusinessLines.ViewModels\bin\Debug\OpenGI.MVC.BusinessLines.ViewModels.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Trader\MVCTrunk\Code\OpenGI.MVC.BusinessLines.ViewModels\bin\Debug\System.Web.WebPages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MsgSchemaMiniFleetNBRq.cs" />
+    <Compile Include="MsgSchemaTradesmanAllNBRq.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Schemas\MsgSchemaShopPackageQuoteNBRq.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -60,7 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libs\OpenGI.MVC.BusinessLines.ViewModels.dll" />
-    <Content Include="RSAQuoteErrors.xml">
+    <Content Include="Libs\System.Web.WebPages.dll" />
+    <Content Include="XMLs\RSAQuoteErrors.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLs\Tradesman1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
