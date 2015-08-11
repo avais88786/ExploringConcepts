@@ -9,6 +9,7 @@ using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Tradesman;
 using AutoMapper;
 using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Tradesman.DeclarationQuestions;
 using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Tradesman.BusinessDetailsQuestions;
+using OpenGI.MVC.BusinessLines.ViewModels.ViewModels;
 
 namespace OTOMReverseEngineerXML
 {
@@ -28,10 +29,13 @@ namespace OTOMReverseEngineerXML
                 .ForMember(d => d.SubsidiaryCompanies, s => s.MapFrom(model => model));
 
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanSubsidiaryCompaniesLogicalGroup>()
-                .ForMember(d => d.SubsidiaryCompanies, s => s.MapFrom(model => model));
+                .ForMember(d => d.SubsidiaryCompanies, s => s.MapFrom(model => model.Insured.Subsidiary));
 
-            Mapper.CreateMap<TradesmanAllNBRq, TradesmanSubsidiaryCompany>()
-                .ForMember(d => d.CompanyName, s => s.MapFrom(model => model.Insured.CompanyName));
+            Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiary, TradesmanSubsidiaryCompany>()
+                .ForMember(d => d.CompanyName, s => s.MapFrom(model => model.CompanyName));
+
+            Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiaryAddress, AddressInformation>()
+                .ForSourceMember(s => s.Line1,Mem;
             
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanDeclarationQuestionsTab>()
                 .ForMember(d => d.TradesmanDeclarationGroup, s => s.MapFrom(model => model));
