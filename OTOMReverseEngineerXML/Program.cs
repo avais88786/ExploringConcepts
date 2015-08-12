@@ -17,13 +17,23 @@ namespace OTOMReverseEngineerXML
     {
         static void Main(string[] args)
         {
+            Mapper.Initialize(cfg => {
+                cfg.ReplaceMemberName("Line1","AddressLineOne");
+                cfg.ReplaceMemberName("Line2","AddressLineTwo");
+                cfg.ReplaceMemberName("Line3","AddressLineThree");
+                cfg.ReplaceMemberName("Line4","AddressLineFour");
+            });
+
+
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanDataCapture>()
                 .ForMember(d => d.DeclarationQuestions, s => s.MapFrom(ss => ss))
-                .ForMember(d => d.BusinessDetails, s => s.MapFrom(ss => ss));
-                //.ForMember(d => d.DeclarationQuestions, src => src.MapFrom(s=> new TradesmanDeclarationQuestionsTab(){TradesmanDeclarationGroup = new TradesmanDeclarationGroup(){UnSpentConvictions = s.Insured.Declaration.ConvictionsInd.Value}} ));
+                .ForMember(d => d.BusinessDetails, s => s.MapFrom(ss => ss))
+                .ForMember(d => d.EmploymentAndTurnover, s => s.MapFrom(ss => ss))
+                .ForMember(d => d.CoversRequired, s => s.MapFrom(ss => ss))
+                .ForMember(d => d.Claims, s => s.MapFrom(ss => ss));
 
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanBusinessDetailsTab>()
-                .ForMember(d => d.SubsidiaryCompaniesGroup, s => s.MapFrom(model => model));
+                .ForMember(d => d.SubsidiaryCompaniesGroup, s => CustomS(s));
 
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanSubsidiaryCompaniesGroup>()
                 .ForMember(d => d.SubsidiaryCompanies, s => s.MapFrom(model => model));
@@ -34,14 +44,13 @@ namespace OTOMReverseEngineerXML
             Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiary, TradesmanSubsidiaryCompany>()
                 .ForMember(d => d.CompanyName, s => s.MapFrom(model => model.CompanyName));
 
-            Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiaryAddress, AddressInformation>()
-                .ForSourceMember(s => s.Line1,Mem;
-            
+            Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiaryAddress, AddressInformation>();
+                
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanDeclarationQuestionsTab>()
                 .ForMember(d => d.TradesmanDeclarationGroup, s => s.MapFrom(model => model));
 
-            Mapper.CreateMap<TradesmanAllNBRq,TradesmanDeclarationGroup>()
-                .ForMember(d => d.DeclaredBankrupt, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value));
+            //Mapper.CreateMap<TradesmanAllNBRq,TradesmanDeclarationGroup>()
+            //    .ForMember(d => d.DeclaredBankrupt, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value));
 
             
 
