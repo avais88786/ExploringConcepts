@@ -11,6 +11,7 @@ using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Tradesman.DeclarationQuesti
 using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Tradesman.BusinessDetailsQuestions;
 using OpenGI.MVC.BusinessLines.ViewModels.ViewModels;
 using System.Reflection;
+using System.Linq.Expressions;
 
 namespace OTOMReverseEngineerXML
 {
@@ -45,7 +46,8 @@ namespace OTOMReverseEngineerXML
                 .ForMember(d => d.TradesmanDeclarationGroup, s => s.MapFrom(model => model));
 
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanDeclarationGroup>()
-                .ForMember(d => d.DeclaredBankrupt, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value));
+                .ForMember(d => d.DeclaredBankrupt, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value))
+                .ForMember(d => d.UnSpentConvictions, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value));
 
             
 
@@ -106,8 +108,10 @@ namespace OTOMReverseEngineerXML
                 PropertyInfo sourceProperty = sourceProperties.FirstOrDefault(prop => NameMatches(prop.Name, destinationProperty.Name));
                 Type sourcePropertyType;
                 if (sourceProperty == null) {
-                    Mapper.CreateMap(sourceType, destinationType).ForMember(destinationProperty.Name, s => s.MapFrom("AgencyAccountRef"));
-                    CreateMappers(sourceType, destinationPropertyType);
+                    var mi = typeof(Program).GetMethod("GenericsMap").MakeGenericMethod(sourceType, destinationType);
+                    mi.Invoke(null, new object[]{destinationProperty.Name});
+                   // Mapper.CreateMap(sourceType, destinationType).ForMember(destinationProperty.Name, s => s.MapFrom("AgencyAccountRef"));
+                    //CreateMappers(sourceType, destinationPropertyType);
                     continue;
                 }
 
@@ -130,11 +134,39 @@ namespace OTOMReverseEngineerXML
                     CreateMappers(sourcePropertyType, destinationPropertyType);
                 }
 
+                
+
                 Mapper.CreateMap(sourceType, destinationType).ForMember(destinationProperty.Name, s => s.MapFrom("AgencyAccountRef"));
             }
 
             Mapper.CreateMap(sourceType, destinationType);
             
+        }
+
+        public static void GenericsMap<T1, T2>(string destPropertyName)
+        {
+            //http://www.crowbarsolutions.com/dynamically-generating-lambda-expressions-at-runtime-from-properties-obtained-through-reflection-on-generic-types/
+
+            //Mapper.CreateMap<TradesmanAllNBRq, TradesmanDataCapture>();
+            //.ForMember(d => d.DeclarationQuestions, s => s.MapFrom(ss => ss))
+
+
+            //Mapper.CreateMap<T1, T2>();
+
+            var destparameterExpression = Expression.Parameter(typeof(T2), "dest");
+            var destmemberExpression = Expression.PropertyOrField(destparameterExpression, destPropertyName);
+            var destmemberExpressionConversion = Expression.Convert(destmemberExpression, typeof(object));
+            var destlambda = Expression.Lambda<Func<T2, object>>(destmemberExpressionConversion, destparameterExpression);
+
+
+            var srcparameterExpression = Expression.Parameter(typeof(T1), "src");
+            //var srcmemberExpression = Expression.Property()
+            var srcmemberExpressionConversion = Expression.Convert(srcparameterExpression, typeof(object));
+            var srclambda = Expression.Lambda<Func<T1, object>>(srcmemberExpressionConversion, srcparameterExpression);
+
+            Mapper.CreateMap<T1, T2>()
+             .ForMember(destlambda, s => s.MapFrom(srclambda));
+
         }
 
         private static void CreateMappers(Type sourcePropertyType, Type destinationPropertyType)
