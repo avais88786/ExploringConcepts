@@ -21,18 +21,13 @@ namespace OTOMReverseEngineerXML
         {
             ConfigureAndInitialize();
 
-            Mapper.CreateMap<TradesmanAllNBRq, TradesmanDataCapture>();
-                //.ForMember(d => d.DeclarationQuestions, s => s.MapFrom(ss => ss))
-                //.ForMember(d => d.BusinessDetails, s => s.MapFrom(ss => ss))
-                //.ForMember(d => d.EmploymentAndTurnover, s => s.MapFrom(ss => ss))
-                //.ForMember(d => d.CoversRequired, s => s.MapFrom(ss => ss))
-                //.ForMember(d => d.Claims, s => s.MapFrom(ss => ss));
+            Mapper.CreateMap<TradesmanAllNBRq, BusinessDetailsGroup>()
+                .ForMember(d => d.CompanyStatus, s => s.MapFrom(model => model.Insured.CompanyStatusCode))
+                .ForMember(d => d.NumberOfYearsExperience, s => s.MapFrom(model => model.Insured.YearsExperience))
+                .ForMember(d => d.AddressInformation, s => s.MapFrom(model => model.Insured.Address));
 
-            Mapper.CreateMap<TradesmanAllNBRq, TradesmanBusinessDetailsTab>()
-                .ForMember(d => d.SubsidiaryCompaniesGroup, s => s.MapFrom(model => model));
-
-            Mapper.CreateMap<TradesmanAllNBRq, TradesmanSubsidiaryCompaniesGroup>()
-                .ForMember(d => d.SubsidiaryCompanies, s => s.MapFrom(model => model));
+            Mapper.CreateMap<TradesmanAllNBRq, IndividualLogicalGroup>()
+                .ForMember(d => d.Individuals, s => s.MapFrom(model => model.Insured.IndividualName));
 
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanSubsidiaryCompaniesLogicalGroup>()
                 .ForMember(d => d.SubsidiaryCompanies, s => s.MapFrom(model => model.Insured.Subsidiary));
@@ -40,14 +35,13 @@ namespace OTOMReverseEngineerXML
             Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiary, TradesmanSubsidiaryCompany>()
                 .ForMember(d => d.CompanyName, s => s.MapFrom(model => model.CompanyName));
 
-            Mapper.CreateMap<TradesmanAllNBRqInsuredSubsidiaryAddress, AddressInformation>();
-
-            Mapper.CreateMap<TradesmanAllNBRq, TradesmanDeclarationQuestionsTab>()
-                .ForMember(d => d.TradesmanDeclarationGroup, s => s.MapFrom(model => model));
-
             Mapper.CreateMap<TradesmanAllNBRq, TradesmanDeclarationGroup>()
                 .ForMember(d => d.DeclaredBankrupt, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value))
-                .ForMember(d => d.UnSpentConvictions, opt => opt.MapFrom(model => model.Insured.Declaration.BankruptInd.Value));
+                .ForMember(d => d.DischargeOfFumes, opt => opt.MapFrom(model => model.Insured.Declaration.DischargeOfWasteInd.Value))
+                .ForMember(d => d.HarmfulSubstances, opt => opt.MapFrom(model => model.Insured.Declaration.HarmfulSubstancesInd.Value))
+                .ForMember(d => d.ProposalRefused, opt => opt.MapFrom(model => model.Insured.Declaration.InsuranceInd.Value))
+                .ForMember(d => d.SeparateDedicatedBusinessPremises, opt => opt.MapFrom(model => model.Insured.Declaration.BusinessPremisesInd.Value))
+                .ForMember(d => d.UnSpentConvictions, opt => opt.MapFrom(model => model.Insured.Declaration.ConvictionsInd.Value));
 
             
 
@@ -59,10 +53,12 @@ namespace OTOMReverseEngineerXML
 
             var x = Mapper.Map<TradesmanAllNBRq, TradesmanDataCapture>(deser);
 
-            var y = new TradesmanDataCapture();
-            y.DeclarationQuestions.TradesmanDeclarationGroup.UnSpentConvictions = deser.Insured.Declaration.ConvictionsInd.Value;
+            xmlSer = new XmlSerializer(typeof(TradesmanDataCapture));
             
-
+            StringBuilder sbuilder = new StringBuilder();
+            StringWriter sWriter = new StringWriter(sbuilder);
+            xmlSer.Serialize(sWriter, x);
+            var y = sbuilder.ToString();
 
         }
 
@@ -77,6 +73,39 @@ namespace OTOMReverseEngineerXML
             });
 
             CreateNestedMappers(typeof(TradesmanAllNBRq), typeof(TradesmanDataCapture));
+            ParseSourceType(typeof(TradesmanAllNBRq), typeof(TradesmanDataCapture));
+        }
+
+        private static void ParseSourceType(Type sourceType, Type destinationType)
+        {
+            PropertyInfo[] sourceProperties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var sourceProperty in sourceProperties)
+            {
+                Type sourcePropertyType = sourceProperty.PropertyType;
+                if (Filter(sourcePropertyType))
+                    continue;
+
+                if (sourceProperty.Name.Contains("Address"))
+                {
+                    Mapper.CreateMap(sourcePropertyType, typeof(AddressInformation));
+                    continue;
+                }
+
+                if (sourceProperty.Name.Contains("Code"))
+                {
+                    Mapper.CreateMap(sourcePropertyType, typeof(CodeList)).ConvertUsing<ToCodeListConverter>();
+                }
+
+                if (sourcePropertyType.IsArray)
+                {
+                    ParseSourceType(sourcePropertyType.GetElementType(), destinationType);
+                }
+
+                if (sourcePropertyType.IsClass)
+                {
+                    ParseSourceType(sourcePropertyType, destinationType);
+                }
+            }
         }
 
         public static void CreateNestedMappers(Type sourceType, Type destinationType)
@@ -89,16 +118,15 @@ namespace OTOMReverseEngineerXML
                 if (Filter(destinationPropertyType))
                     continue;
 
-                if (destinationProperty.PropertyType.IsClass) {
+                if (destinationProperty.PropertyType.IsClass && !(destinationProperty.PropertyType.IsGenericType && destinationProperty.PropertyType.GetGenericTypeDefinition() == typeof(List<>))) {
 
-                    if (destinationProperty.PropertyType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Count() == 1 && destinationProperty.PropertyType.GetProperties().First().PropertyType.IsClass){
-                    //if (destinationProperty.PropertyType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Any(p => p.PropertyType.IsClass)) {
-                    //    foreach (var destProp in destinationProperty.PropertyType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(p => p.PropertyType.IsClass))
+                    var mi = typeof(Program).GetMethod("GenericsMap").MakeGenericMethod(sourceType, destinationType);
+                    mi.Invoke(null, new object[] { destinationProperty.Name });
+
+                        if (destinationProperty.PropertyType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Count() == 1 && destinationProperty.PropertyType.GetProperties().First().PropertyType.IsClass){
                         {
-                            CreateMappers(sourceType, destinationPropertyType);
+                                CreateMappers(sourceType, destinationPropertyType);
                         }
-
-                        
                     }
 
                     CreateNestedMappers(sourceType, destinationProperty.PropertyType);
@@ -108,10 +136,6 @@ namespace OTOMReverseEngineerXML
                 PropertyInfo sourceProperty = sourceProperties.FirstOrDefault(prop => NameMatches(prop.Name, destinationProperty.Name));
                 Type sourcePropertyType;
                 if (sourceProperty == null) {
-                    var mi = typeof(Program).GetMethod("GenericsMap").MakeGenericMethod(sourceType, destinationType);
-                    mi.Invoke(null, new object[]{destinationProperty.Name});
-                   // Mapper.CreateMap(sourceType, destinationType).ForMember(destinationProperty.Name, s => s.MapFrom("AgencyAccountRef"));
-                    //CreateMappers(sourceType, destinationPropertyType);
                     continue;
                 }
 
@@ -136,11 +160,11 @@ namespace OTOMReverseEngineerXML
 
                 
 
-                Mapper.CreateMap(sourceType, destinationType).ForMember(destinationProperty.Name, s => s.MapFrom("AgencyAccountRef"));
+                Mapper.CreateMap(sourceType, destinationType);
             }
 
             Mapper.CreateMap(sourceType, destinationType);
-            
+
         }
 
         public static void GenericsMap<T1, T2>(string destPropertyName)
@@ -189,4 +213,17 @@ namespace OTOMReverseEngineerXML
 
 
     }
+
+    public class ToCodeListConverter : ITypeConverter<object, CodeList>
+    {
+
+        public CodeList Convert(ResolutionContext context)
+        {
+            var valueProperty = context.SourceType.GetProperty("Value");
+            var shortDescrProperty = context.SourceType.GetProperty("ShortDescription");
+            return new CodeList() { SelectedDescription = (string)shortDescrProperty.GetValue(context.SourceValue), SelectedValue = (string)valueProperty.GetValue(context.SourceValue) };
+        }
+    }
+
+
 }
