@@ -66,6 +66,7 @@
     <None Include="Schemas\MsgSchemaTradesmanAllNBRq.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Scs\Scs.zip" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libs\OpenGI.MVC.BusinessLines.ViewModels.dll" />

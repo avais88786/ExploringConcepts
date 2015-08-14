@@ -170,6 +170,9 @@ namespace OTOMReverseEngineerXML
         public static void GenericsMap<T1, T2>(string destPropertyName)
         {
             //http://www.crowbarsolutions.com/dynamically-generating-lambda-expressions-at-runtime-from-properties-obtained-through-reflection-on-generic-types/
+            //http://stackoverflow.com/questions/8315819/expression-lambda-and-query-generation-at-runtime-simplest-where-example
+            //http://www.andymcm.com/blog/2009/09/building-lambda-expressions-at-runtime.html
+            //http://www.codeproject.com/Articles/17575/Lambda-Expressions-and-Expression-Trees-An-Introdu
 
             //Mapper.CreateMap<TradesmanAllNBRq, TradesmanDataCapture>();
             //.ForMember(d => d.DeclarationQuestions, s => s.MapFrom(ss => ss))
