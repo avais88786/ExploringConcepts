@@ -52,6 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperProfiles\BaseConfigurations.cs" />
+    <Compile Include="AutoMapperProfiles\BaseProfile.cs" />
+    <Compile Include="AutoMapperProfiles\MiniFleetNBRqProfile.cs" />
+    <Compile Include="AutoMapperProfiles\TradesmanNBRqProfile.cs" />
     <Compile Include="MsgSchemaMiniFleetNBRq.cs" />
     <Compile Include="MsgSchemaTradesmanAllNBRq.cs" />
     <Compile Include="Program.cs" />
@@ -76,6 +80,7 @@
     </Content>
     <Content Include="XMLs\Tradesman1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
