@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Linq.Expressions;
 using OTOMReverseEngineerXML.AutoMapperProfiles;
 using OpenGI.MVC.BusinessLines.ViewModels.ViewModels.Fleet;
+using OTOMReverseEngineerXML.Helpers;
 
 namespace OTOMReverseEngineerXML
 {
@@ -44,7 +45,10 @@ namespace OTOMReverseEngineerXML
             deser = (TradesmanAllNBRq)xmlSer.Deserialize(fs);
             fs.Close();
 
-            x = Mapper.Map<TradesmanAllNBRq, TradesmanDataCapture>((TradesmanAllNBRq)deser);
+            x = Mapper.Map<TradesmanAllNBRq, TradesmanDataCapture>((TradesmanAllNBRq)deser, opt =>
+            {
+                opt.AfterMap((src, dest) => dest.ProcessGroupVisibleBool());
+            });
 
             xmlSer = new XmlSerializer(typeof(TradesmanDataCapture));
 

@@ -46,7 +46,7 @@ namespace OTOMReverseEngineerXML.AutoMapperProfiles
                     continue;
                 }
 
-                if (sourceProperty.Name.Contains("Code"))
+                if (sourceProperty.Name.Contains("Code") || sourceProperty.Name.Contains("ClaimReportingStatus"))
                 {
                     Mapper.CreateMap(sourcePropertyType, typeof(CodeList)).ConvertUsing<ToCodeListConverter>();
                 }
@@ -76,7 +76,7 @@ namespace OTOMReverseEngineerXML.AutoMapperProfiles
                 if (destinationProperty.PropertyType.IsClass && !(destinationProperty.PropertyType.IsGenericType && destinationProperty.PropertyType.GetGenericTypeDefinition() == typeof(List<>))) {
 
                     var mi = typeof(BaseConfigurations).GetMethod("GenericsMap").MakeGenericMethod(sourceType, destinationType);
-                    mi.Invoke(null, new object[] { destinationProperty.Name });
+                    mi.Invoke(null, new object[] { destinationProperty.Name,null });
 
                         if (destinationProperty.PropertyType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Count() == 1 && destinationProperty.PropertyType.GetProperties().First().PropertyType.IsClass){
                         {
@@ -86,7 +86,16 @@ namespace OTOMReverseEngineerXML.AutoMapperProfiles
 
                     CreateNestedMappers(sourceType, destinationProperty.PropertyType);
                 }
-
+                //Tried to Map a list from destination to any array type from source, DIDNOT WORK :'( 
+                //else if (destinationProperty.PropertyType.IsGenericType && destinationProperty.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+                //{
+                //    var anyListTypeInSource = sourceProperties.FirstOrDefault(s => s.PropertyType.IsArray);
+                //    if (anyListTypeInSource != null)
+                //    {
+                //        var mi = typeof(BaseConfigurations).GetMethod("GenericsMap").MakeGenericMethod(sourceType, destinationType);
+                //        mi.Invoke(null, new object[] { destinationProperty.Name,anyListTypeInSource.Name });
+                //    }
+                //}
 
                 PropertyInfo sourceProperty = sourceProperties.FirstOrDefault(prop => NameMatches(prop.Name, destinationProperty.Name));
                 Type sourcePropertyType;
@@ -122,7 +131,7 @@ namespace OTOMReverseEngineerXML.AutoMapperProfiles
 
         }
 
-        public static void GenericsMap<T1, T2>(string destPropertyName)
+        public static void GenericsMap<T1, T2>(string destPropertyName,string sourcePropertyName = null)
         {
             //http://www.crowbarsolutions.com/dynamically-generating-lambda-expressions-at-runtime-from-properties-obtained-through-reflection-on-generic-types/
             //http://stackoverflow.com/questions/8315819/expression-lambda-and-query-generation-at-runtime-simplest-where-example
@@ -140,10 +149,17 @@ namespace OTOMReverseEngineerXML.AutoMapperProfiles
             var destmemberExpressionConversion = Expression.Convert(destmemberExpression, typeof(object));
             var destlambda = Expression.Lambda<Func<T2, object>>(destmemberExpressionConversion, destparameterExpression);
 
-
+            MemberExpression srcmemberExpression;
+            Expression srcmemberExpressionConversion;
             var srcparameterExpression = Expression.Parameter(typeof(T1), "src");
-            //var srcmemberExpression = Expression.Property()
-            var srcmemberExpressionConversion = Expression.Convert(srcparameterExpression, typeof(object));
+            if (!string.IsNullOrEmpty(sourcePropertyName)) { 
+             srcmemberExpression = Expression.Property(srcparameterExpression,sourcePropertyName);
+             srcmemberExpressionConversion = Expression.Convert(srcmemberExpression, typeof(object));
+            }
+            else
+            {
+                srcmemberExpressionConversion = Expression.Convert(srcparameterExpression, typeof(object));
+            }
             var srclambda = Expression.Lambda<Func<T1, object>>(srcmemberExpressionConversion, srcparameterExpression);
 
             Mapper.CreateMap<T1, T2>()

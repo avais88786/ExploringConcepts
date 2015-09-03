@@ -56,6 +56,7 @@
     <Compile Include="AutoMapperProfiles\BaseProfile.cs" />
     <Compile Include="AutoMapperProfiles\MiniFleetNBRqProfile.cs" />
     <Compile Include="AutoMapperProfiles\TradesmanNBRqProfile.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="MsgSchemaMiniFleetNBRq.cs" />
     <Compile Include="MsgSchemaTradesmanAllNBRq.cs" />
     <Compile Include="Program.cs" />
