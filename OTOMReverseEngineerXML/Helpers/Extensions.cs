@@ -9,16 +9,13 @@ namespace OTOMReverseEngineerXML.Helpers
 {
     public static class Extensions
     {
-        public static object ProcessGroupVisibleBool(this object dataCapture)
+        public static object ProcessGroupVisible(this object dataCapture)
         {
-            
-                ProcessLogicalGroups(ref dataCapture);
-           
-                
+                SetGroupVisible(ref dataCapture);
                 return dataCapture;
         }
 
-        private static void ProcessLogicalGroups(ref object propertyContents, System.Reflection.PropertyInfo property = null)
+        private static void SetGroupVisible(ref object propertyContents)
         {
             foreach (var propertyInThis in propertyContents.GetType().GetProperties())
             {
@@ -30,7 +27,7 @@ namespace OTOMReverseEngineerXML.Helpers
 
                     propertyValue.GroupVisible = true;
                     var objects = (object)propertyValue;
-                    ProcessLogicalGroups(ref objects, propertyInThis);
+                    SetGroupVisible(ref objects);
                 }
                 else if (propertyInThis.PropertyType.IsSubclassOf(typeof(RepeatGroupBase)))
                 {
@@ -40,7 +37,7 @@ namespace OTOMReverseEngineerXML.Helpers
 
                     propertyValue.GroupVisible = true;
                     var objects = (object)propertyValue;
-                    ProcessLogicalGroups(ref objects, propertyInThis);
+                    SetGroupVisible(ref objects);
                 }
                 else if(propertyInThis.PropertyType.IsClass && !Filter(propertyInThis.PropertyType))
                 {
@@ -51,31 +48,18 @@ namespace OTOMReverseEngineerXML.Helpers
                         for (i = 0; i < propertyValue.Count; i++)
                         {
                             var objects = (object)propertyValue[i];
-                            ProcessLogicalGroups(ref objects, null);
+                            ((RepeatGroupBase)objects).GroupVisible = true;
+                            SetGroupVisible(ref objects);
                             propertyValue[i] = objects;
                         }
-                        //if (propertyValue.Count > 0)
-                        //{
-                        //    var objects = (object)propertyValue;
-                        //    var genericType = propertyInThis.PropertyType.GenericTypeArguments[0];
-                        //    ProcessLogicalGroups(ref objects, null);
-                        //}
-                        //else
-                        //    continue;
                     }
                     else
                     {
                         var propertyValue = propertyInThis.GetValue(propertyContents);
-                        ProcessLogicalGroups(ref propertyValue, propertyInThis);
+                        SetGroupVisible(ref propertyValue);
                     }
-
-                    
                 }
-                    
-
             }
-
-            
         }
 
         static bool Filter(Type type)
